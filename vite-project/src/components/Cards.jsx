@@ -3,7 +3,8 @@ import Card from 'react-bootstrap/Card';
 
 
 
-function CardDisplay({data}){
+function CardDisplay({data,deletehandler}){
+
 
 return(
     <Card  style={{ width: '18rem' }}>
@@ -13,7 +14,19 @@ return(
         <Card.Text>
          {data.description}
         </Card.Text>
-        <Button variant="danger">Delete</Button>
+        <Card.Text>
+         Price: Rs{data.price}
+        </Card.Text>
+        <Card.Text>
+        Rate: {data.rating}
+        </Card.Text>
+        <Card.Text>
+        Brand: {data.brand}
+        </Card.Text>
+         
+           
+
+        <Button onClick={(e)=>deletehandler(data.id)} variant="danger">Delete</Button>
       </Card.Body>
     </Card>
 
