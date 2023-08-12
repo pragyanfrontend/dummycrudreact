@@ -5,6 +5,8 @@ import CardDisplay from './components/Cards'
 import Addmodal from './components/Modal'
 import Button from 'react-bootstrap/Button';
 
+import {  InputGroup,FormControl  } from 'react-bootstrap';
+
 function App() {
 
 
@@ -568,6 +570,10 @@ function App() {
    const [image,setimage]=useState('')
    const [description,setdescription]=useState('')
    const [brand,setbrand]=useState('')
+   const [query,setquery]= useState('')
+   //console.log(
+    //product.filter(prod=>prod.title.toLowerCase().includes("i"))
+   //)
 
 
     function deletehandler(id) {
@@ -600,9 +606,6 @@ function addproducthandler(){
 
     }
 
-
-
-
  
 
 
@@ -611,14 +614,35 @@ function addproducthandler(){
                 <h2 className='text-center'>
                     BASIC CRUD OF DUMMY PRODUCTS
                 </h2>
+
+                <InputGroup className='mb-3'>
+                <FormControl
+                    placeholder='Search products...'
+                    aria-label='Search products'
+                   onChange={(e)=>setquery(e.target.value)}
+                    
+                />
+                <Button  variant='outline-secondary'>Search</Button>
+            </InputGroup>
+            
                 <Button onClick={addproduct}>AddProduct</Button>
 
                 <div className="d-flex flex-wrap">
                     {
-                        product.map((prod) => {
+                        product.filter(prod=>prod.title.toLowerCase().includes(query)).length===0 ?
+                        (
+                            <b>no product found !!!</b>
+                        )
+                      
+                    :
+                    
+                    (
+                        product.filter(prod=>prod.title.toLowerCase().includes(query)).map((prod) => {
                             return <CardDisplay key={prod.id} data={prod} deletehandler={deletehandler}></CardDisplay>
                         })
+                    )   
                     }
+                    
 
                 </div>
                 <Addmodal showmodal={showmodal} setmodal={setmodal} addproducthandler={addproducthandler}
