@@ -2,6 +2,8 @@ import { useState } from 'react'
 
 import './App.css'
 import CardDisplay from './components/Cards'
+import Addmodal from './components/Modal'
+import Button from 'react-bootstrap/Button';
 
 function App() {
 
@@ -561,6 +563,12 @@ function App() {
         }
     ]
     )
+   const [showmodal,setmodal]=useState(false)
+   const [title, settitle]=useState('')
+   const [image,setimage]=useState('')
+   const [description,setdescription]=useState('')
+   const [brand,setbrand]=useState('')
+
 
     function deletehandler(id) {
         console.log(id)
@@ -572,11 +580,38 @@ function App() {
 
 
     }
+function addproduct(){
+    setmodal(true)
+
+
+}
+function addproducthandler(){
+
+    const obj ={
+        id:Date.now(),
+        thumbnail:image,
+        title:title,
+        description:description,
+        brand:brand,
+        
+    }
+    console.log(obj)
+      setproduct([obj,...product])
+
+    }
+
+
+
+
+ 
+
+
         return (
             <>
                 <h2 className='text-center'>
                     BASIC CRUD OF DUMMY PRODUCTS
                 </h2>
+                <Button onClick={addproduct}>AddProduct</Button>
 
                 <div className="d-flex flex-wrap">
                     {
@@ -586,6 +621,13 @@ function App() {
                     }
 
                 </div>
+                <Addmodal showmodal={showmodal} setmodal={setmodal} addproducthandler={addproducthandler}
+                
+                
+                setimage={setimage} setdescription={setdescription} setbrand={setbrand} settitle={settitle}
+                
+                
+                ></Addmodal>
             </>
 
 
